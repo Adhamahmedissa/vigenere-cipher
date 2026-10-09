@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VigenèreLab</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+:root{--bg:#0f1517;--sf:#151d20;--sf2:#1b2528;--line:#2a373a;--fg:#e7e3d7;--mu:#93a09b;--br:#d9a94f;--brs:rgba(217,169,79,.15);--vd:#55bda6;--vds:rgba(85,189,166,.16);
+--fd:"Cinzel",Georgia,serif;--fb:"IBM Plex Sans","IBM Plex Sans Arabic",system-ui,sans-serif;--fm:"IBM Plex Mono","IBM Plex Sans Arabic",ui-monospace,monospace;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef0eb;--sf:#fff;--sf2:#f4f5f1;--line:#d5dad2;--fg:#1a2224;--mu:#5a6661;--br:#94640f;--brs:rgba(148,100,15,.12);--vd:#1a7a67;--vds:rgba(26,122,103,.12);color-scheme:light}}
+:root[data-theme="dark"]{--bg:#0f1517;--sf:#151d20;--sf2:#1b2528;--line:#2a373a;--fg:#e7e3d7;--mu:#93a09b;--br:#d9a94f;--brs:rgba(217,169,79,.15);--vd:#55bda6;--vds:rgba(85,189,166,.16);color-scheme:dark}
+:root[data-theme="light"]{--bg:#eef0eb;--sf:#fff;--sf2:#f4f5f1;--line:#d5dad2;--fg:#1a2224;--mu:#5a6661;--br:#94640f;--brs:rgba(148,100,15,.12);--vd:#1a7a67;--vds:rgba(26,122,103,.12);color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 var(--fb)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--br);outline-offset:2px}
+h1,h2,h3,p{margin:0}h1,h2{font-family:var(--fd);line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(26px,4.4vw,44px)}h2{font-size:clamp(22px,3vw,32px)}h3{font-size:16px}
+:lang(ar) h1,:lang(ar) h2{font-family:var(--fb);font-weight:600}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.in{max-width:1100px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--fd);font-weight:700;letter-spacing:.07em;font-size:18px;color:var(--fg);text-decoration:none}.brand b{color:var(--br)}
+.nav{display:flex;gap:2px;flex:1;overflow-x:auto;min-width:0}.nav a{color:var(--mu);text-decoration:none;padding:5px 10px;border-radius:6px;white-space:nowrap;font-size:14px}.nav a:hover{background:var(--sf2);color:var(--fg)}
+.btn{border:1px solid var(--line);background:var(--sf2);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:14px}.btn:hover{border-color:var(--br)}
+.btn.p{background:var(--br);border-color:var(--br);color:var(--bg);font-weight:600}
+main{max-width:1100px;margin:0 auto;padding:26px 18px 56px;display:flex;flex-direction:column;gap:60px}
+.sec{display:flex;flex-direction:column;gap:18px;scroll-margin-top:80px}
+.eb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--br);font-weight:600}:lang(ar) .eb{letter-spacing:0}
+.lede{color:var(--mu);max-width:64ch}
+.fm{font-family:var(--fm);color:var(--vd);font-size:14px;direction:ltr;unicode-bidi:isolate}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:860px){.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{border:0;background:transparent;padding:7px 14px;cursor:pointer;color:var(--mu)}.seg [aria-pressed=true]{background:var(--br);color:var(--bg);font-weight:600}
+select,input.k{background:var(--sf2);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+input.k{width:100%;font-family:var(--fm);font-size:18px;letter-spacing:.12em;text-transform:uppercase}
+textarea{width:100%;min-height:100px;resize:vertical;background:var(--sf2);border:1px solid var(--line);border-radius:8px;padding:11px 13px;font:15px/1.55 var(--fm)}
+textarea:focus,input.k:focus{border-color:var(--br);outline:none}#out{color:var(--br);background:var(--brs)}
+.lb{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);font-weight:600;display:flex;justify-content:space-between;align-items:center}:lang(ar) .lb{letter-spacing:0}
+.tw{overflow:auto;max-height:430px;border:1px solid var(--line);border-radius:8px;direction:ltr}
+table.tab{border-collapse:collapse;font:11px var(--fm);margin:auto}
+.tab td,.tab th{width:22px;height:22px;text-align:center;padding:0;color:var(--mu);border:0}
+.tab th{color:var(--br);background:var(--sf2);position:sticky;top:0;left:0;z-index:1}.tab tbody th{position:sticky;left:0}
+.tab .row{background:var(--brs)}.tab td.col{background:var(--vds)}.tab td.hit{background:var(--vd);color:var(--bg);font-weight:600}
+.tab tr.kr td{background:var(--brs)}.tab tr.kr td.col{background:var(--vds)}.tab tr.kr td.hit{background:var(--vd)}
+.cells{display:flex;flex-wrap:wrap;gap:5px;direction:ltr}
+.cell{display:flex;flex-direction:column;align-items:center;min-width:28px;border:1px solid var(--line);border-radius:6px;background:var(--sf2);font-family:var(--fm);cursor:pointer;overflow:hidden}
+.cell i{font-style:normal;font-size:11px;color:var(--vd);padding-top:2px}.cell .a{padding:2px 5px}.cell .b{padding:2px 5px 4px;color:var(--br);opacity:.25}
+.cell.done .b,.cell.cur .b{opacity:1}.cell.skip{opacity:.45}.cell.cur{border-color:var(--vd);box-shadow:0 5px 16px -8px var(--vd)}
+.big{display:flex;justify-content:center;gap:16px;font:42px var(--fm);direction:ltr}.big .t{color:var(--br)}
+.stp{display:flex;flex-direction:column;gap:6px;font:14px var(--fm);direction:ltr}.stp div{background:var(--sf2);border-radius:6px;padding:7px 10px}.stp b{color:var(--vd);font-weight:500}
+.prog{height:3px;background:var(--line);border-radius:2px}.prog i{display:block;height:100%;background:var(--vd);width:0}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.stat .n{font:700 30px var(--fd);color:var(--vd);direction:ltr}.stat .l{font-size:12px;color:var(--mu)}
+.plain{font-family:var(--fm);background:var(--sf2);border-radius:8px;padding:12px;max-height:170px;overflow:auto;font-size:14px;word-break:break-word}
+.chart{width:100%;display:block;direction:ltr}.chart text{font:11px var(--fm);fill:var(--mu)}.chart .bar{fill:var(--line)}.chart .sel{fill:var(--vd)}.chart .ln{stroke:var(--br);stroke-dasharray:4 3}
+table.cols{border-collapse:collapse;font:14px var(--fm);width:100%;direction:ltr}.cols td,.cols th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:start}.cols th{font:600 12px var(--fb);color:var(--mu);text-transform:uppercase}
+.cmp td,.cmp th{font:14px var(--fb);text-align:start}
+.pill{padding:2px 8px;border-radius:99px;font-size:12px}.bad{background:rgba(226,122,98,.18);color:#e27a62}.good{background:rgba(124,201,138,.18);color:#4fa862}
+.learn p,.learn li{color:var(--mu)}ul{margin:0;padding-inline-start:18px;display:flex;flex-direction:column;gap:6px}
+footer{border-top:1px solid var(--line);color:var(--mu);font-size:13px;padding:20px 18px;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s}.toast.s{opacity:1}
+.card{box-shadow:0 14px 32px -22px rgba(0,0,0,.55)}
+#lab{padding:26px 22px;border:1px solid var(--line);border-radius:14px;background:radial-gradient(90% 70% at 0 0,var(--brs),transparent 60%),var(--sf)}
+.bd{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--br);color:var(--bg);font:700 12px var(--fb);margin-inline-end:8px;letter-spacing:0}
+#inp,#out{min-height:120px;font-size:16px}
+.steps{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px;color:var(--mu)}.steps li b{color:var(--fg)}
+table.al2{border-collapse:collapse;font:15px var(--fm);direction:ltr;min-width:100%}
+.al2 th{font:600 11px var(--fb);letter-spacing:.06em;text-transform:uppercase;color:var(--mu);text-align:start;padding:7px 12px;white-space:nowrap;position:sticky;left:0;background:var(--sf)}
+.al2 td{text-align:center;padding:7px 9px;border-bottom:1px solid var(--line)}
+.al2 tr.k td{color:var(--vd)}.al2 tr.o td{color:var(--br);font-weight:600;background:var(--brs)}.al2 tr.n td{color:var(--mu);font-size:13px}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+<a class="brand" href="#lab">VIGENÈRE<b>LAB</b></a>
+<nav class="nav"><a href="#lab" data-i="n1"></a><a href="#vis" data-i="n2"></a><a href="#atk" data-i="n3"></a><a href="#learn" data-i="n4"></a></nav>
+<button class="btn" id="lang"></button><button class="btn" id="theme" aria-label="Theme">◐</button>
+</div></header>
+<main>
+<section class="sec" id="lab">
+<div><div class="eb">I · <span data-i="eb1"></span></div><h1 data-i="t1"></h1></div>
+<p class="lede" data-i="s1"></p>
+<p class="fm">E(pᵢ) = (pᵢ + k<sub>i mod m</sub>) mod n &nbsp;·&nbsp; D(cᵢ) = (cᵢ − k<sub>i mod m</sub>) mod n</p>
+<div class="g2">
+<div class="card">
+<div class="row" style="justify-content:space-between"><div class="seg"><button id="mE" aria-pressed="true" data-i="enc"></button><button id="mD" aria-pressed="false" data-i="dec"></button></div>
+<select id="al" aria-label="Alphabet"><option value="en" data-i="aen"></option><option value="ar" data-i="aar"></option></select></div>
+<div class="lb"><span><b class="bd">1</b><span id="inL"></span></span></div><textarea id="inp" dir="auto" spellcheck="false" data-ph="ph1"></textarea>
+<div><div class="lb"><span><b class="bd">2</b><span data-i="key"></span></span><span id="klen" class="fm"></span></div><input class="k" id="key" dir="auto" autocomplete="off" spellcheck="false"></div>
+<div class="row" style="justify-content:center"><button class="btn" id="swap" data-i="swap"></button><button class="btn" id="rnd" data-i="rnd"></button></div>
+<div class="lb"><span><b class="bd">3</b><span id="outL"></span></span><button class="btn" id="copy" data-i="copy"></button></div><textarea id="out" dir="auto" readonly></textarea>
+</div>
+<div class="card"><div class="lb" data-i="tab"></div><div class="tw"><table class="tab" id="tab"></table></div><p class="lede" style="font-size:13px" data-i="tabn"></p></div>
+</div>
+<div class="card" id="flow"><h3 data-i="fl_t"></h3>
+<ol class="steps"><li data-i="fl1"></li><li data-i="fl2"></li><li data-i="fl3"></li></ol>
+<div class="lb"><span data-i="fl_live"></span></div><div class="tw" style="max-height:none"><table class="al2" id="al2"></table></div></div>
+</section>
+
+<section class="sec" id="vis">
+<div><div class="eb">II · <span data-i="eb2"></span></div><h2 data-i="t2"></h2></div><p class="lede" data-i="s2"></p>
+<div class="g2">
+<div class="card"><div class="cells" id="cells"></div><div class="prog"><i id="pg"></i></div>
+<div class="row"><button class="btn" id="vP">‹</button><button class="btn p" id="vPl"></button><button class="btn" id="vN">›</button><button class="btn" id="vR" data-i="reset"></button></div></div>
+<div class="card"><div class="lb" id="stL"></div><div class="big"><span id="mF">—</span><span>→</span><span class="t" id="mT">—</span></div><div class="stp" id="stp"></div></div>
+</div></section>
+
+<section class="sec" id="atk">
+<div><div class="eb">III · <span data-i="eb3"></span></div><h2 data-i="t3"></h2></div><p class="lede" data-i="s3"></p>
+<div class="g2">
+<div class="card"><div class="lb"><span data-i="ct"></span><select id="atAl"><option value="en" data-i="aen"></option><option value="ar" data-i="aar"></option></select></div>
+<textarea id="ct" dir="auto" spellcheck="false" style="min-height:150px"></textarea>
+<div class="row"><button class="btn p" id="run" data-i="run"></button><button class="btn" id="useLab" data-i="useLab"></button><button class="btn" id="sample" data-i="sample"></button></div></div>
+<div class="card"><div class="stats"><div class="stat"><div class="l" data-i="vlen"></div><div class="n" id="vL">—</div></div><div class="stat"><div class="l" data-i="vkey"></div><div class="n" id="vK" style="font-size:22px;word-break:break-all">—</div></div><div class="stat"><div class="l">IC</div><div class="n" id="vI">—</div></div></div>
+<div class="lb" data-i="vpl"></div><div class="plain" id="vPl2" dir="auto"></div></div>
+</div>
+<div class="g2">
+<div class="card"><h3 data-i="ict"></h3><p class="lede" style="font-size:14px" data-i="icn"></p><svg class="chart" id="icC" viewBox="0 0 520 220"></svg></div>
+<div class="card"><h3 data-i="cct"></h3><p class="lede" style="font-size:14px" data-i="ccn"></p><div style="overflow:auto;max-height:260px"><table class="cols" id="colT"></table></div></div>
+</div></section>
+
+<section class="sec" id="learn">
+<div><div class="eb">IV · <span data-i="eb4"></span></div><h2 data-i="t4"></h2></div>
+<div class="g3 learn">
+<div class="card"><h3 data-i="l1t"></h3><p data-i="l1b"></p><p class="fm">H+L=S · E+E=I · L+M=X</p></div>
+<div class="card"><h3 data-i="l2t"></h3><p data-i="l2b"></p></div>
+<div class="card"><h3 data-i="l3t"></h3><ul data-i="l3b"></ul></div>
+</div>
+<div class="card"><h3 data-i="cmt"></h3><div style="overflow:auto"><table class="cols cmp" style="min-width:560px"><thead><tr><th data-i="c0"></th><th data-i="c1"></th><th data-i="c2"></th></tr></thead><tbody>
+<tr><td><b data-i="r1"></b></td><td class="fm">25</td><td><span class="pill bad" data-i="br"></span></td></tr>
+<tr><td><b data-i="r2"></b></td><td class="fm">26⁸ ≈ 2.1×10¹¹</td><td><span class="pill bad" data-i="br2"></span></td></tr>
+<tr><td><b data-i="r3"></b></td><td class="fm">≥ n·|text|</td><td><span class="pill good" data-i="otp"></span></td></tr></tbody></table></div></div>
+</section>
+</main>
+<footer data-i="foot"></footer><div class="toast" id="toast" role="status"></div>
+<script>
+const T={en:{n1:"Lab",n2:"Visualize",n3:"Attack",n4:"Learn",eb1:"Encrypt & decrypt",t1:"A keyword, not a single shift.",s1:"Vigenère shifts each letter by a different amount, taken from a repeating keyword. A = 0, B = 1 … so the keyword LEMON applies shifts 11, 4, 12, 14, 13, then starts over.",enc:"Encrypt",dec:"Decrypt",aen:"English · 26 letters",aar:"Arabic · 28 letters",key:"Keyword",rnd:"Random key",swap:"Swap",copy:"Copy",pt:"Plaintext",ctx:"Ciphertext",tab:"Tabula recta",fl_t:"How your word is transferred",fl1:"<b>Input:</b> every letter becomes a number (A = 0, B = 1 … Z = 25). Spaces and punctuation are skipped.",fl2:"<b>Keyword:</b> the keyword is repeated under the text, one key letter per input letter. Each key letter is also a number, and that is the shift.",fl3:"<b>Output:</b> add (encrypt) or subtract (decrypt) the shift, wrap around with mod n, and turn the number back into a letter.",fl_live:"Live example from your text",rI:"Input",rK:"Key letter",rX:"Input index",rS:"Shift",rY:"Result index",rO:"Output",ph1:"Type or paste your message here…",tabn:"Row = key letter, column = plaintext letter, cell = ciphertext letter.",letters:"{n} letters",copied:"Copied",
+eb2:"Step by step",t2:"Watch each letter get its own shift",s2:"Each step shows the key letter in use, the modular arithmetic, and the matching row and column of the table above.",play:"Play",pause:"Pause",reset:"Reset",step:"Step {i} of {n}",pass:"Not in the alphabet, so it passes through and the key does not advance.",empty:"Type something in the Lab.",
+eb3:"Cryptanalysis",t3:"Break it without the key",s3:"Step 1: the index of coincidence (IC) of every n-th letter reveals the key length. Step 2: each column is just a Caesar cipher, so a χ² test finds its shift.",ct:"Intercepted ciphertext",run:"Run attack",useLab:"Use Lab output",sample:"Load sample",vlen:"Key length",vkey:"Recovered key",vpl:"Recovered plaintext",short:"Text is short: statistics need more letters (100+ works best).",
+ict:"Step 1 · Key length",icn:"Average IC when the text is split into m columns. Real language scores about 0.066, random letters about 0.038. The first strong peak is the key length.",cct:"Step 2 · One Caesar per column",ccn:"For each column, the shift with the lowest χ² is that key letter.",col:"Column",best:"Key letter",shiftW:"Shift",
+eb4:"Understand",t4:"Why it resisted for 300 years, and why it fell",l1t:"The idea",l1b:"The same plaintext letter can become different ciphertext letters, so simple frequency counting on the whole text fails. The cipher was called le chiffre indéchiffrable.",l2t:"The weakness",l2b:"Letters that sit a whole number of key lengths apart are encrypted with the same shift. Kasiski (1863) and the IC test find that length, and then every column is a plain Caesar cipher.",l3t:"What helps",l3b:"<li><b>Long keys</b> make columns short and statistics weak.</li><li><b>A random key as long as the message</b> (never reused) is the one-time pad, which is unbreakable.</li><li>Modern systems use AES-GCM or ChaCha20-Poly1305 instead.</li>",cmt:"Compared",c0:"Cipher",c1:"Key space",c2:"Frequency analysis",r1:"Caesar",r2:"Vigenère, 8-letter key",r3:"Vigenère, random key as long as the text",br:"Breaks it",br2:"Breaks it (IC + χ²)",otp:"Does not apply (one-time pad)",foot:"Cryptography course project · everything runs in your browser."},
+ar:{n1:"المعمل",n2:"خطوة بخطوة",n3:"الهجوم",n4:"الشرح",eb1:"تشفير وفك تشفير",t1:"كلمة مفتاحية، وليس إزاحة واحدة.",s1:"شفرة فيجنير تزيح كل حرف بمقدار مختلف مأخوذ من كلمة مفتاحية تتكرر. A = 0 وB = 1 …، فالكلمة LEMON تطبق الإزاحات 11 و4 و12 و14 و13 ثم تعيد من البداية.",enc:"تشفير",dec:"فك التشفير",aen:"الإنجليزية · 26 حرفًا",aar:"العربية · 28 حرفًا",key:"الكلمة المفتاحية",rnd:"مفتاح عشوائي",swap:"تبديل",copy:"نسخ",pt:"النص الأصلي",ctx:"النص المشفر",tab:"جدول فيجنير",fl_t:"كيف تُحوَّل كلمتك",fl1:"<b>المدخل:</b> كل حرف يتحول إلى رقم (A = 0 وB = 1 … Z = 25). المسافات وعلامات الترقيم تُتجاهل.",fl2:"<b>الكلمة المفتاحية:</b> تتكرر تحت النص، حرف مفتاح لكل حرف مدخل. كل حرف مفتاح هو رقم أيضًا، وهو مقدار الإزاحة.",fl3:"<b>المخرج:</b> نجمع الإزاحة (تشفير) أو نطرحها (فك تشفير)، ونلف حول الأبجدية بـ mod n، ثم نحول الرقم إلى حرف.",fl_live:"مثال حي من نصك",rI:"المدخل",rK:"حرف المفتاح",rX:"ترتيب المدخل",rS:"الإزاحة",rY:"ترتيب الناتج",rO:"المخرج",ph1:"اكتب رسالتك هنا أو الصقها…",tabn:"الصف = حرف المفتاح، العمود = حرف النص الأصلي، الخلية = حرف النص المشفر.",letters:"{n} حرف",copied:"تم النسخ",
+eb2:"خطوة بخطوة",t2:"شاهد كل حرف يأخذ إزاحته الخاصة",s2:"كل خطوة تعرض حرف المفتاح المستخدم، والعملية الحسابية، والصف والعمود المقابلين في الجدول بالأعلى.",play:"تشغيل",pause:"إيقاف",reset:"إعادة",step:"الخطوة {i} من {n}",pass:"ليس من حروف الأبجدية، فيمر كما هو ولا يتقدم المفتاح.",empty:"اكتب نصًا في المعمل.",
+eb3:"تحليل الشفرات",t3:"اكسرها بدون المفتاح",s3:"الخطوة 1: معامل التطابق (IC) لكل حرف رقم m يكشف طول المفتاح. الخطوة 2: كل عمود هو شفرة قيصر عادية، فيجد اختبار χ² إزاحتها.",ct:"النص المشفر المعترَض",run:"ابدأ الهجوم",useLab:"استخدم ناتج المعمل",sample:"تحميل عينة",vlen:"طول المفتاح",vkey:"المفتاح المستعاد",vpl:"النص المستعاد",short:"النص قصير: الإحصاء يحتاج حروفًا أكثر (الأفضل 100 فأكثر).",
+ict:"الخطوة 1 · طول المفتاح",icn:"متوسط IC عند تقسيم النص إلى m عمود. اللغة الحقيقية تعطي حوالي 0.066 والحروف العشوائية حوالي 0.038. أول قمة قوية هي طول المفتاح.",cct:"الخطوة 2 · شفرة قيصر لكل عمود",ccn:"لكل عمود، الإزاحة ذات أقل χ² هي حرف المفتاح.",col:"العمود",best:"حرف المفتاح",shiftW:"الإزاحة",
+eb4:"الفهم",t4:"لماذا صمدت 300 سنة ولماذا سقطت",l1t:"الفكرة",l1b:"نفس حرف النص الأصلي قد يتحول إلى حروف مختلفة، فيفشل عدّ التكرار البسيط على النص كله. سُميت قديمًا الشفرة التي لا تُحل.",l2t:"نقطة الضعف",l2b:"الحروف التي تفصلها مضاعفات طول المفتاح تُشفَّر بنفس الإزاحة. كاسيسكي (1863) واختبار IC يجدان هذا الطول، وبعدها كل عمود شفرة قيصر عادية.",l3t:"ما الذي يقوّيها",l3b:"<li><b>المفاتيح الطويلة</b> تجعل الأعمدة قصيرة والإحصاء ضعيفًا.</li><li><b>مفتاح عشوائي بطول الرسالة</b> (لا يُستخدم مرتين) هو الوسادة لمرة واحدة، وهي غير قابلة للكسر.</li><li>الأنظمة الحديثة تستخدم AES-GCM أو ChaCha20-Poly1305.</li>",cmt:"مقارنة",c0:"الشفرة",c1:"مساحة المفاتيح",c2:"تحليل التكرار",r1:"قيصر",r2:"فيجنير، مفتاح 8 أحرف",r3:"فيجنير، مفتاح عشوائي بطول النص",br:"يكسرها",br2:"يكسرها (IC + χ²)",otp:"لا ينطبق (وسادة لمرة واحدة)",foot:"مشروع مادة التشفير · كل شيء يعمل داخل متصفحك."}};
+let L='en';const t=(k,v)=>{let s=T[L][k]??T.en[k]??k;if(v)for(const x in v)s=s.replace('{'+x+'}',v[x]);return s};
+const AL={en:[..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"],ar:[..."ابتثجحخدذرزسشصضطظعغفقكلمنهوي"]};
+const FREQ={en:[8.17,1.49,2.78,4.25,12.70,2.23,2.02,6.09,6.97,0.15,0.77,4.03,2.41,6.75,7.51,1.93,0.10,5.99,6.33,9.06,2.76,0.98,2.36,0.15,1.97,0.07],ar:[12.4,4.0,3.7,0.5,1.3,1.9,0.7,3.0,0.9,4.3,0.6,2.6,1.0,1.1,0.6,0.8,0.2,3.3,0.4,3.0,2.4,2.0,10.6,6.2,5.5,4.8,5.7,6.7]};
+const AN={'أ':'ا','إ':'ا','آ':'ا','ٱ':'ا','ة':'ه','ى':'ي','ؤ':'و','ئ':'ي'};
+const mod=(a,n)=>((a%n)+n)%n,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const norm=(s,al)=>al==='ar'?s.replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآٱةىؤئ]/g,c=>AN[c]):s;
+const idx=(c,al)=>AL[al].indexOf(al==='en'?c.toUpperCase():c);
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function keys(key,al){return [...norm(key,al)].map(c=>idx(c,al)).filter(i=>i>=0)}
+function vig(text,key,al,d){const A=AL[al],n=A.length,ks=keys(key,al);if(!ks.length)return text;let j=0,o='';
+for(const ch of norm(text,al)){const i=idx(ch,al);if(i<0){o+=ch;continue}let c=A[mod(i+d*ks[j++%ks.length],n)];if(al==='en'&&ch!==ch.toUpperCase())c=c.toLowerCase();o+=c}return o}
+/* attack */
+const ic=(a,n)=>{const N=a.length;if(N<2)return 0;const c=Array(n).fill(0);a.forEach(i=>c[i]++);return c.reduce((s,x)=>s+x*(x-1),0)/(N*(N-1))};
+function chiFor(c,al,k){const F=FREQ[al],n=F.length,sf=F.reduce((a,b)=>a+b),tot=c.reduce((a,b)=>a+b);if(!tot)return 0;let x=0;for(let i=0;i<n;i++){const e=tot*F[i]/sf;x+=(c[(i+k)%n]-e)**2/Math.max(e,1e-6)}return x}
+function crack(text,al){const n=AL[al].length,Ls=[...norm(text,al)].map(c=>idx(c,al)).filter(i=>i>=0),M=Math.max(1,Math.min(14,Math.floor(Ls.length/4)));
+const ics=[];for(let m=1;m<=M;m++){const cols=Array.from({length:m},()=>[]);Ls.forEach((v,i)=>cols[i%m].push(v));ics.push(cols.reduce((s,c)=>s+ic(c,n),0)/m)}
+const mx=Math.max(...ics),m=ics.findIndex(v=>v>=.9*mx)+1,cols=Array.from({length:m},()=>[]);Ls.forEach((v,i)=>cols[i%m].push(v));
+const col=cols.map(c=>{const cn=Array(n).fill(0);c.forEach(i=>cn[i]++);let b=0,bc=1e18;for(let k=0;k<n;k++){const x=chiFor(cn,al,k);if(x<bc){bc=x;b=k}}return{k:b,chi:bc,len:c.length}});
+const key=col.map(c=>AL[al][c.k]).join('');return{total:Ls.length,ics,m,col,key,ic:ics[m-1],plain:vig(text,key,al,-1)}}
+/* state */
+const DEF={en:{key:'LEMON',text:'Attack at dawn. Hold the eastern gate until the legion arrives.'},ar:{key:'نيل',text:'سنلتقي عند الفجر خلف البوابة الشرقية'}};
+const SAMPLE="In the spring the general wrote to his officers that the northern bridge would be held through the night and that every company should march at first light. The messenger carried the letter past the river camps, and no one who read it without the key could understand a single word of the orders inside. Reports from the border said that the enemy had crossed the mountains and was moving quickly towards the valley, so the council agreed to send fresh troops before the weather turned.";
+const S={al:'en',mode:'enc',key:DEF.en.key,input:DEF.en.text};
+const res=()=>vig(S.input,S.key,S.al,S.mode==='enc'?1:-1);
+function buildTab(){const A=AL[S.al];$('#tab').innerHTML='<thead><tr><th></th>'+A.map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+A.map((r,i)=>`<tr data-r="${i}"><th>${r}</th>`+A.map((_,j)=>`<td data-c="${j}">${A[(i+j)%A.length]}</td>`).join('')+'</tr>').join('')+'</tbody>'}
+function hl(r,c){$$('#tab .kr,#tab .col,#tab .hit').forEach(e=>e.classList.remove('kr','col','hit'));if(r<0)return;const tr=$(`#tab tr[data-r="${r}"]`);tr.classList.add('kr');$$(`#tab td[data-c="${c}"]`).forEach(e=>e.classList.add('col'));tr.querySelector(`td[data-c="${c}"]`).classList.add('hit')}
+function update(){S.input=$('#inp').value;S.key=$('#key').value;$('#out').value=res();
+$('#mE').setAttribute('aria-pressed',S.mode==='enc');$('#mD').setAttribute('aria-pressed',S.mode==='dec');
+$('#inL').textContent=t(S.mode==='enc'?'pt':'ctx');$('#outL').textContent=t(S.mode==='enc'?'ctx':'pt');
+$('#klen').textContent='m = '+keys(S.key,S.al).length;visBuild();buildAlign()}
+$('#inp').oninput=update;$('#key').oninput=update;
+$('#mE').onclick=()=>{S.mode='enc';update()};$('#mD').onclick=()=>{S.mode='dec';update()};
+$('#al').onchange=e=>{S.al=e.target.value;$('#inp').value=DEF[S.al].text;$('#key').value=DEF[S.al].key;buildTab();update()};
+$('#rnd').onclick=()=>{const A=AL[S.al],m=4+Math.floor(Math.random()*5);$('#key').value=Array.from({length:m},()=>A[Math.floor(Math.random()*A.length)]).join('');update()};
+$('#swap').onclick=()=>{$('#inp').value=$('#out').value;S.mode=S.mode==='enc'?'dec':'enc';update()};
+let tt;function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('s');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('s'),1700)}
+$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText($('#out').value);toast(t('copied'))}catch(e){$('#out').select()}};
+function buildAlign(){const A=AL[S.al],n=A.length,ks=keys(S.key,S.al),sg=S.mode==='enc'?1:-1,op=sg>0?'+':'−',
+Ls=[...norm(S.input,S.al)].filter(c=>idx(c,S.al)>=0).slice(0,14),el=$('#al2');
+if(!ks.length||!Ls.length){el.innerHTML='';return}
+const X=Ls.map(c=>idx(c,S.al)),K=Ls.map((_,i)=>ks[i%ks.length]),Y=X.map((x,i)=>mod(x+sg*K[i],n));
+const row=(cls,lab,f)=>`<tr class="${cls}"><th>${t(lab)}</th>${Ls.map((_,i)=>`<td>${f(i)}</td>`).join('')}</tr>`;
+el.innerHTML=row('','rI',i=>A[X[i]])+row('n','rX',i=>X[i])+row('k','rK',i=>A[K[i]])+row('n','rS',i=>op+K[i])+row('n','rY',i=>`(${X[i]}${op}${K[i]}) mod ${n} = ${Y[i]}`.replace(/ mod.*=/,' ='))+row('o','rO',i=>A[Y[i]])}
+$('#inp').placeholder='';
+/* visualizer */
+const V={items:[],i:-1,timer:null};
+function visBuild(){stopPlay();const A=AL[S.al],n=A.length,ks=keys(S.key,S.al),d=S.mode==='enc'?1:-1;let j=0;
+V.items=[...norm(S.input,S.al)].slice(0,64).map(ch=>{const x=idx(ch,S.al);if(x<0||!ks.length)return{ch,skip:1};const k=ks[j++%ks.length],y=mod(x+d*k,n);let o=A[y];if(S.al==='en'&&ch!==ch.toUpperCase())o=o.toLowerCase();return{ch,x,k,y,o}});
+$('#cells').innerHTML=V.items.length?V.items.map((it,q)=>`<div class="cell${it.skip?' skip':''}" data-c="${q}"><i>${it.skip?'&nbsp;':A[it.k]}</i><span class="a">${it.ch===' '?'·':esc(it.ch)}</span><span class="b">${it.skip?(it.ch===' '?'·':esc(it.ch)):it.o}</span></div>`).join(''):`<p class="lede">${t('empty')}</p>`;
+$$('.cell').forEach(e=>e.onclick=()=>{stopPlay();go(+e.dataset.c)});go(-1)}
+function go(i){V.i=Math.max(-1,Math.min(i,V.items.length-1));const A=AL[S.al],n=A.length;
+$$('.cell').forEach((e,q)=>{e.classList.toggle('done',q<V.i);e.classList.toggle('cur',q===V.i)});
+$('#pg').style.width=V.items.length?(V.i+1)/V.items.length*100+'%':'0';$('#stL').textContent=t('step',{i:V.i+1,n:V.items.length});
+const it=V.items[V.i];if(!it){$('#mF').textContent=$('#mT').textContent='—';$('#stp').innerHTML=`<div>n = <b>${n}</b> · m = <b>${keys(S.key,S.al).length}</b></div>`;hl(-1);return}
+$('#mF').textContent=it.ch===' '?'␣':it.ch;$('#mT').textContent=it.skip?$('#mF').textContent:it.o;
+if(it.skip){$('#stp').innerHTML=`<div style="font-family:var(--fb)">${t('pass')}</div>`;hl(-1);return}
+const op=S.mode==='enc'?'+':'−',raw=S.mode==='enc'?it.x+it.k:it.x-it.k;
+$('#stp').innerHTML=`<div>key = <b>${A[it.k]}</b> = <b>${it.k}</b></div><div>x = idx(${A[it.x]}) = <b>${it.x}</b></div><div>(${it.x} ${op} ${it.k}) mod ${n} = ${raw} mod ${n} = <b>${it.y}</b> → <b>${A[it.y]}</b></div>`;
+hl(it.k,S.mode==='enc'?it.x:it.y)}
+function setPl(){$('#vPl').textContent=t(V.timer?'pause':'play')}
+function stopPlay(){clearInterval(V.timer);V.timer=null;setPl()}
+$('#vPl').onclick=()=>{if(V.timer){stopPlay();return}if(V.i>=V.items.length-1)go(-1);V.timer=setInterval(()=>{if(V.i>=V.items.length-1)stopPlay();else go(V.i+1)},600);setPl()};
+$('#vN').onclick=()=>{stopPlay();go(V.i+1)};$('#vP').onclick=()=>{stopPlay();go(V.i-1)};$('#vR').onclick=()=>{stopPlay();go(-1)};
+/* attack ui */
+let AA='en';
+function runAttack(){const txt=$('#ct').value,r=crack(txt,AA);
+$('#vL').textContent=r.total?r.m:'—';$('#vK').textContent=r.total?r.key:'—';$('#vI').textContent=r.total?r.ic.toFixed(3):'—';
+$('#vPl2').textContent=r.total?(r.total<60?t('short')+'\n\n':'')+r.plain:'';
+const W=520,H=220,pl=34,pb=26,pt=10,iw=W-pl-8,ih=H-pb-pt,mx=.08,bw=iw/Math.max(r.ics.length,1),Y=v=>pt+ih-Math.min(v,mx)/mx*ih;let s='';
+[0,.02,.04,.06,.08].forEach(v=>s+=`<text x="${pl-5}" y="${Y(v)+4}" text-anchor="end">${v.toFixed(2)}</text>`);
+s+=`<line class="ln" x1="${pl}" x2="${W-8}" y1="${Y(.066)}" y2="${Y(.066)}"/>`;
+r.ics.forEach((v,i)=>{s+=`<rect class="${i+1===r.m?'sel':'bar'}" x="${pl+i*bw+bw*.15}" y="${Y(v)}" width="${bw*.7}" height="${pt+ih-Y(v)}" rx="2"/><text x="${pl+i*bw+bw/2}" y="${H-8}" text-anchor="middle">${i+1}</text>`});
+$('#icC').innerHTML=r.total?s:'';
+$('#colT').innerHTML=r.total?`<tr><th>${t('col')}</th><th>${t('best')}</th><th>${t('shiftW')}</th><th>χ²</th></tr>`+r.col.map((c,i)=>`<tr><td>${i+1}</td><td style="color:var(--vd)">${AL[AA][c.k]}</td><td>${c.k}</td><td>${c.chi.toFixed(1)}</td></tr>`).join(''):''}
+$('#run').onclick=runAttack;$('#ct').oninput=runAttack;$('#atAl').onchange=e=>{AA=e.target.value;runAttack()};
+$('#useLab').onclick=()=>{$('#ct').value=S.mode==='enc'?$('#out').value:S.input;AA=S.al;$('#atAl').value=AA;runAttack()};
+$('#sample').onclick=()=>{AA='en';$('#atAl').value='en';$('#ct').value=vig(SAMPLE,'CIPHER','en',1).toUpperCase();runAttack()};
+/* lang / theme */
+function applyLang(){$('#inp').placeholder=t('ph1');document.documentElement.lang=L;document.documentElement.dir=L==='ar'?'rtl':'ltr';
+$$('[data-i]').forEach(e=>{const v=T[L][e.dataset.i];if(typeof v==='string')e.innerHTML=v});
+$('#lang').textContent=L==='ar'?'English':'العربية';update();setPl();runAttack()}
+$('#lang').onclick=()=>{L=L==='ar'?'en':'ar';applyLang()};
+$('#theme').onclick=()=>{const d=document.documentElement,cur=d.dataset.theme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.dataset.theme=cur==='dark'?'light':'dark'};
+$('#inp').value=S.input;$('#key').value=S.key;buildTab();$('#ct').value=vig(SAMPLE,'CIPHER','en',1).toUpperCase();applyLang();
+</script>
+</body>
+</html>
